@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.DS_Store
+.vscode
+coverage
+npm-debug.log
+.idea
+*.log
+/build
+*.tsbuildinfo
+lods
+uploads
+models
+temp

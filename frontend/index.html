@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive 3D Model Loader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🧩 Progressive 3D Model Loader</h1>
+            <p>Upload large 3D models and watch them load progressively</p>
+        </header>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="file-input-wrapper">
+                    <input type="file" id="fileInput" name="model" accept=".glb,.gltf" required>
+                    <label for="fileInput" class="file-label">
+                        <span id="fileName">Choose 3D Model (.glb, .gltf)</span>
+                    </label>
+                </div>
+                <button type="submit" id="uploadBtn" class="btn-upload">
+                    <span>Upload & Generate LODs</span>
+                </button>
+            </form>
+
+            <!-- Upload Progress -->
+            <div id="uploadProgress" class="upload-progress" style="display: none;">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <p id="progressText">Uploading...</p>
+            </div>
+        </div>
+
+        <!-- Model Selector -->
+        <div class="model-selector" id="modelSelector" style="display: none;">
+            <label for="modelList">Select Model:</label>
+            <select id="modelList" class="model-dropdown">
+                <option value="">Choose a model...</option>
+            </select>
+        </div>
+
+        <!-- Viewer Section -->
+        <div class="viewer-container">
+            <div id="viewer" class="viewer"></div>
+            
+            <!-- Quality Indicator -->
+            <div class="quality-indicator" id="qualityIndicator">
+                <div class="quality-badge">Quality: <span id="currentQuality">-</span></div>
+                <div class="lod-status">
+                    <span class="lod-item" data-lod="0">240p</span>
+                    <span class="lod-item" data-lod="1">360p</span>
+                    <span class="lod-item" data-lod="2">720p</span>
+                    <span class="lod-item" data-lod="3">1080p</span>
+                </div>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="loading-overlay">
+                <div class="spinner"></div>
+                <p>Loading Model...</p>
+            </div>
+
+            <!-- Controls Info -->
+            <div class="controls-info">
+                🖱️ Left Click: Rotate | Right Click: Pan | Scroll: Zoom
+            </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel" id="statsPanel">
+            <div class="stat-item">
+                <span class="stat-label">File Size:</span>
+                <span class="stat-value" id="fileSize">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Load Time:</span>
+                <span class="stat-value" id="loadTime">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Polygons:</span>
+                <span class="stat-value" id="polyCount">-</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Main Application -->
+    <script src="main.js"></script>
+</body>
+</html>
