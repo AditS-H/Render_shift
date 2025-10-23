@@ -208,12 +208,23 @@ input[type="file"] {
     border-radius: 5px;
     font-size: 0.85rem;
     transition: all 0.3s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lod-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
 .lod-item.active {
     background: #4ade80;
     color: black;
     font-weight: 600;
+}
+
+.lod-item.active:hover {
+    background: #22c55e;
 }
 
 .lod-item.loading {
