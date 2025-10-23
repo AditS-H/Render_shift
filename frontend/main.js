@@ -6,6 +6,20 @@ let scene, camera, renderer, controls;
 let currentModel = null;
 let currentLOD = -1;
 let loadStartTime = null;
+let meshoptDecoder = null;
+let availableLODPaths = []; // Store current model's LOD paths
+let isManualSelection = false; // Track if user manually selected quality
+
+// Initialize Meshopt Decoder
+async function initMeshoptDecoder() {
+    if (typeof MeshoptDecoder !== 'undefined') {
+        meshoptDecoder = MeshoptDecoder;
+        await MeshoptDecoder.ready;
+        console.log('✓ Meshopt decoder initialized');
+    } else {
+        console.warn('Meshopt decoder not available - compressed models may fail');
+    }
+}
 
 // Initialize Three.js scene
 function initScene() {
@@ -114,6 +128,11 @@ async function loadModelProgressive(lodPaths) {
 function loadLOD(path, lodIndex) {
     return new Promise((resolve, reject) => {
         const loader = new THREE.GLTFLoader();
+        
+        // Set Meshopt decoder if available
+        if (meshoptDecoder) {
+            loader.setMeshoptDecoder(meshoptDecoder);
+        }
         
         loader.load(
             API_URL + path,
@@ -329,7 +348,8 @@ document.getElementById('modelList').addEventListener('change', (e) => {
 });
 
 // Initialize on page load
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+    await initMeshoptDecoder();
     initScene();
     loadModelList();
 });
