@@ -70,7 +70,8 @@ async function generateLODs(inputPath, baseName) {
 
   for (const config of lodConfigs) {
     const outputPath = path.join(lodDir, `${config.name}.glb`);
-    const command = `gltfpack -i "${inputPath}" -o "${outputPath}" -cc -kn -si ${config.scale}`;
+    // Removed -cc flag to disable Meshopt compression (use standard glTF)
+    const command = `gltfpack -i "${inputPath}" -o "${outputPath}" -kn -si ${config.scale}`;
     
     try {
       console.log(`Generating ${config.name} (scale: ${config.scale})...`);
