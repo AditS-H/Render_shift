@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: progressive-model-loader-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm install -g gltfpack
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+    disk:
+      name: model-storage
+      mountPath: /opt/render/project/src/models
+      sizeGB: 10
+      
