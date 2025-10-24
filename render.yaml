@@ -8,9 +8,8 @@ services:
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 18.17.0
+        value: "18.17.0"
     disk:
-      name: model-storage
+      name: model-storages
       mountPath: /opt/render/project/src/models
       sizeGB: 10
-      
