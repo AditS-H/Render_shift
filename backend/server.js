@@ -8,7 +8,7 @@ const { promisify } = require('util');
 
 const execPromise = promisify(exec);
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Enable CORS for frontend communication
 app.use(cors());
